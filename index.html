@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final v11 - Quiz Extra Small)</title>
+    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final - Small Visuals)</title>
     
     <script>
     window.MathJax = {
@@ -37,28 +37,23 @@
         .slide-split .right { width: 60%; height: 100%; position: relative; background: radial-gradient(circle, #f8fafc 0%, #cbd5e1 100%); order: 2; cursor: move; display: flex; justify-content: center; align-items: center; }
         .nav-btn { position: absolute; bottom: 20px; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-family: 'Segoe UI', sans-serif; border: none; cursor: pointer; transition: all 0.2s; z-index: 50; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .btn-prev { left: 20px; background: #cbd5e1; color: #334155; }
-        .btn-prev:hover { background: #94a3b8; }
         .btn-next { right: 20px; background: #3b82f6; color: white; }
-        .btn-next:hover { background: #2563eb; }
-        .highlight-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 0.95rem; }
-        .quiz-btn { display: block; width: 100%; text-align: left; padding: 12px; margin-bottom: 8px; background: white; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; touch-action: manipulation; }
+        
+        .quiz-btn { display: block; width: 100%; text-align: left; padding: 12px; margin-bottom: 8px; background: white; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
         .quiz-btn:active { transform: scale(0.98); }
         .quiz-btn.correct { background: #dcfce7; border-color: #22c55e; color: #166534; font-weight: bold; }
         .quiz-btn.wrong { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
 
+        .highlight-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 10px; margin: 10px 0; border-radius: 4px; }
+
         @media (max-width: 768px) {
             #main-container { padding: 0; }
             #slide-deck { border-radius: 0; }
-            .slide-header { font-size: 0.9rem; padding: 0 10px; }
-            .slide-content.slide-split { flex-direction: column; }
+            .slide-split { flex-direction: column; }
             .slide-split .right { width: 100%; height: 45%; order: 1; border-bottom: 1px solid #cbd5e1; }
-            .slide-split .left { width: 100%; height: 55%; order: 2; padding: 15px 15px 80px 15px; }
-            .nav-btn { bottom: 80px; padding: 12px 18px; opacity: 0.9; }
-            .btn-prev { left: 15px; }
-            .btn-next { right: 15px; }
+            .slide-split .left { width: 100%; height: 55%; order: 2; padding-bottom: 80px; }
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        svg text { font-family: 'Times New Roman', serif; user-select: none; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -66,83 +61,47 @@
 <div id="main-container">
     <div id="slide-deck">
         <div class="slide-header">
-            <span class="truncate">HỆ TRỤC TỌA ĐỘ OXYZ</span>
-            <span id="slide-indicator" class="text-xs font-normal text-gray-300 ml-2 whitespace-nowrap">Slide 1/11</span>
+            <span>HỆ TRỤC TỌA ĐỘ OXYZ</span>
+            <span id="slide-indicator" class="text-xs font-normal text-gray-300 ml-2">Slide 1/9</span>
         </div>
 
         <div class="slide-content active" id="slide-0">
             <div class="slide-full flex flex-col items-center justify-center text-center bg-slate-900 text-white">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-blue-400">HỆ TRỤC TOẠ ĐỘ<br>TRONG KHÔNG GIAN</h1>
-                <p class="text-lg text-slate-400">Toán Hình Học 12</p>
-                <div class="mt-6 px-4 py-1 border border-slate-600 rounded-full text-sm">GV: LÊ THỊ DÂN AN</div>
+                <h1 class="text-4xl font-bold mb-4 text-blue-400">HỆ TRỤC TOẠ ĐỘ<br>TRONG KHÔNG GIAN</h1>
+                <p class="text-lg text-slate-400">Bài tập trắc nghiệm (6 câu)</p>
             </div>
         </div>
 
-        <div class="slide-content" id="slide-1">
-            <div class="slide-full">
-                <h2 class="text-2xl font-bold text-slate-800 border-b-2 border-blue-500 inline-block mb-4">I. MỤC TIÊU</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white p-4 rounded-lg shadow border-t-4 border-blue-500">
-                        <h3 class="font-bold text-blue-700 mb-2">Kiến Thức</h3>
-                        <ul class="list-disc pl-5 space-y-1 text-sm md:text-base">
-                            <li>Nhận biết hệ trục $Oxyz$.</li>
-                            <li>Xác định tọa độ điểm, vectơ.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow border-t-4 border-green-500">
-                        <h3 class="font-bold text-green-700 mb-2">Năng Lực</h3>
-                        <ul class="list-disc pl-5 space-y-1 text-sm md:text-base">
-                            <li>Tư duy hình học không gian.</li>
-                            <li>Quan sát hình biểu diễn.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide-content slide-split" id="slide-2">
+        <div class="slide-content slide-split" id="slide-1">
             <div class="left">
                 <h2 class="text-xl font-bold text-blue-700 mb-2">1. Hệ trục Oxyz</h2>
                 <div class="highlight-box">
                     <p>Ba trục $Ox, Oy, Oz$ vuông góc nhau tại $O$.</p>
                     <ul class="mt-1 list-disc pl-4 text-sm">
-                        <li>$O$: Gốc tọa độ (0;0;0).</li>
+                        <li>$O(0;0;0)$.</li>
                         <li>$\vec{i}, \vec{j}, \vec{k}$: Vectơ đơn vị.</li>
                     </ul>
                 </div>
-                <p class="text-sm text-slate-500">Kéo hình bên để xoay 3D.</p>
             </div>
             <div class="right" id="viz-theory-1"></div>
         </div>
 
-        <div class="slide-content slide-split" id="slide-3">
+        <div class="slide-content slide-split" id="slide-2">
             <div class="left">
-                <h2 class="text-xl font-bold text-blue-700 mb-2">2. Tọa độ điểm</h2>
-                <div class="highlight-box text-center">
-                    <p class="font-bold">$\vec{OM} = x\vec{i} + y\vec{j} + z\vec{k}$</p>
-                    <p>$\Leftrightarrow M(x; y; z)$</p>
-                </div>
-                <p class="text-sm italic text-slate-500 mt-2">Ví dụ: $\vec{OM} = 2\vec{i} + \vec{k} \Rightarrow M(2; 0; 1)$.</p>
-            </div>
-            <div class="right" id="viz-theory-2"></div>
-        </div>
-
-        <div class="slide-content slide-split" id="slide-4">
-            <div class="left">
-                <div class="bg-blue-600 text-white px-2 py-0.5 inline-block rounded text-xs mb-1">Trắc nghiệm</div>
                 <h2 class="text-lg font-bold text-slate-800">Câu 1</h2>
-                <p class="text-sm mb-2">Kích thước hình hộp: $Ox=2, Oy=4, Oz=3$.</p>
+                <p class="text-sm mb-2">Cho hình hộp có $Ox=2, Oy=4, Oz=3$.</p>
                 <div class="highlight-box"><p>Tọa độ điểm $A$ là: </p></div>
                 <div class="options">
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(1; 1; 1)$</button>
-                    <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(0; 0; 0)$</button>
-                    <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(0; 0; 1)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(2; 0; 0)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(0; 2; 0)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(0; 0; 2)$</button>
                 </div>
             </div>
             <div class="right" id="viz-q1"></div>
         </div>
 
-        <div class="slide-content slide-split" id="slide-5">
+        <div class="slide-content slide-split" id="slide-3">
             <div class="left">
                 <h2 class="text-lg font-bold text-slate-800">Câu 2</h2>
                 <div class="highlight-box"><p>Tìm tọa độ điểm $B$ là: </p></div>
@@ -150,12 +109,13 @@
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(4; 0; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(0; 4; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(0; 0; 4)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(4; 4; 0)$</button>
                 </div>
             </div>
             <div class="right" id="viz-q2"></div>
         </div>
 
-        <div class="slide-content slide-split" id="slide-6">
+        <div class="slide-content slide-split" id="slide-4">
             <div class="left">
                 <h2 class="text-lg font-bold text-slate-800">Câu 3</h2>
                 <div class="highlight-box"><p>Tìm tọa độ điểm $A'$ là: </p></div>
@@ -163,26 +123,27 @@
                     <button class="quiz-btn" onclick="checkAnswer(this, true)">A. $(0; 0; 3)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">B. $(3; 0; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(0; 3; 0)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(3; 3; 3)$</button>
                 </div>
             </div>
             <div class="right" id="viz-q3"></div>
         </div>
 
-        <div class="slide-content slide-split" id="slide-7">
+        <div class="slide-content slide-split" id="slide-5">
             <div class="left">
                 <h2 class="text-lg font-bold text-slate-800">Câu 4</h2>
-                <p class="text-sm mb-2">Điểm $C$ thuộc mặt $(Oxy)$ là: </p>
                 <div class="highlight-box"><p>Tọa độ điểm $C$ là?</p></div>
                 <div class="options">
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(2; 4; 3)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(2; 4; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(4; 2; 0)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(0; 4; 2)$</button>
                 </div>
             </div>
             <div class="right" id="viz-q4"></div>
         </div>
 
-        <div class="slide-content slide-split" id="slide-8">
+        <div class="slide-content slide-split" id="slide-6">
             <div class="left">
                 <h2 class="text-lg font-bold text-slate-800">Câu 5</h2>
                 <div class="highlight-box"><p>Tọa độ điểm $B'$ là: </p></div>
@@ -190,29 +151,31 @@
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(0; 3; 4)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(0; 4; 3)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(2; 4; 3)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(4; 0; 3)$</button>
                 </div>
             </div>
             <div class="right" id="viz-q5"></div>
         </div>
 
-        <div class="slide-content slide-split" id="slide-9">
+        <div class="slide-content slide-split" id="slide-7">
             <div class="left">
                 <h2 class="text-lg font-bold text-slate-800">Câu 6</h2>
-                <div class="highlight-box"><p>Tọa độ điểm $C'$ (đỉnh đối diện $O$).</p></div>
+                <div class="highlight-box"><p>Tọa độ điểm $C'$ là:</p></div>
                 <div class="options">
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(2; 4; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">B. $(0; 4; 3)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, true)">C. $(2; 4; 3)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(3; 4; 2)$</button>
                 </div>
             </div>
             <div class="right" id="viz-q6"></div>
         </div>
 
-        <div class="slide-content" id="slide-10">
+        <div class="slide-content" id="slide-8">
             <div class="slide-full flex flex-col items-center justify-center text-center">
                 <h2 class="text-3xl font-bold text-blue-600 mb-4">HOÀN THÀNH</h2>
-                <p class="text-lg">Bài tập về nhà: 2.15, 2.16 (SGK).</p>
                 <div class="mt-8 text-6xl">🎉</div>
+                <button onclick="location.reload()" class="mt-8 px-6 py-2 bg-slate-200 rounded">Làm lại</button>
             </div>
         </div>
 
@@ -232,11 +195,10 @@
     const totalSlides = slides.length;
     const indicator = document.getElementById('slide-indicator');
 
+    // Cấu hình Slide
     const slideConfig = [
         { type: 'html' },
-        { type: 'html' },
         { type: 'theory-axes', targetId: 'viz-theory-1' },
-        { type: 'theory-point', targetId: 'viz-theory-2' },
         { type: 'quiz', targetId: 'viz-q1', highlight: 'A' },
         { type: 'quiz', targetId: 'viz-q2', highlight: 'B' },
         { type: 'quiz', targetId: 'viz-q3', highlight: "A'" },
@@ -259,7 +221,6 @@
             container.innerHTML = "";
             if(config.type === 'quiz') renderQuizScene(config.targetId, config.highlight);
             else if (config.type === 'theory-axes') renderAxesScene(config.targetId);
-            else if (config.type === 'theory-point') renderPointScene(config.targetId);
         }
         if(window.MathJax) MathJax.typesetPromise();
     }
@@ -285,9 +246,9 @@
         resizeTimer = setTimeout(() => showSlide(currentSlide), 100);
     });
 
-    // --- D3 LOGIC ---
+    // --- D3 LOGIC (GIỮ NGUYÊN CODE GỐC ĐỂ HÌNH NHỎ) ---
     const vertices = {
-        'O': {x:0, y:0, z:0}, 'A': {x:0, y:0, z:0},
+        'O': {x:0, y:0, z:0}, 'A': {x:2, y:0, z:0},
         'D': {x:2, y:0, z:0}, 'B': {x:0, y:4, z:0}, 'C': {x:2, y:4, z:0},
         "A'": {x:0, y:0, z:3}, "D'": {x:2, y:0, z:3}, "B'": {x:0, y:4, z:3}, "C'": {x:2, y:4, z:3}
     };
@@ -309,62 +270,30 @@
         return { x: sx * scale, y: sy * scale };
     }
 
-    // --- HELPER: DRAW VECTOR WITH MANUAL ARROW ---
     function drawVectorWithArrow(g, p1, p2, color, strokeWidth) {
-        g.append("line")
-            .attr("x1", p1.x).attr("y1", p1.y)
-            .attr("x2", p2.x).attr("y2", p2.y)
-            .attr("stroke", color)
-            .attr("stroke-width", strokeWidth);
-
+        g.append("line").attr("x1", p1.x).attr("y1", p1.y).attr("x2", p2.x).attr("y2", p2.y).attr("stroke", color).attr("stroke-width", strokeWidth);
         const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
-
-        g.append("path")
-            .attr("d", "M0,0 L-10,-5 L-10,5 Z") 
-            .attr("fill", color)
-            .attr("transform", `translate(${p2.x},${p2.y}) rotate(${angle})`);
+        g.append("path").attr("d", "M0,0 L-10,-5 L-10,5 Z").attr("fill", color).attr("transform", `translate(${p2.x},${p2.y}) rotate(${angle})`);
     }
 
-    // --- HELPER: DRAW TEXT LABELS ---
     function drawLabel(g, p, txt, color, dx=0, dy=0, bold=true) {
         g.append("text").attr("x", p.x + dx).attr("y", p.y + dy).text(txt).attr("fill", color)
             .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
             .style("font-weight", bold ? "bold" : "normal").style("font-size", "14px");
     }
 
-    // --- HELPER: DRAW VECTOR LABEL (TEXT + HAT) ---
     function drawVectorLabel(g, p, txt, color, dx=0, dy=0) {
         const charWidth = 12; 
         const arrowLength = Math.max(20, txt.length * charWidth); 
         const halfLen = arrowLength / 2;
-        
-        g.append("text")
-            .attr("x", p.x + dx).attr("y", p.y + dy)
-            .text(txt)
-            .attr("fill", color)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .style("font-weight", "bold").style("font-size", "18px")
-            .style("font-family", "Times New Roman, serif").style("font-style", "italic");
-            
-        const arrowY = p.y + dy - 18; 
-        const cx = p.x + dx;
-        const arrowStartX = cx - halfLen;
-        const arrowEndX = cx + halfLen;
-
-        // Manual Arrow Path for Text Hat
-        g.append("path")
-            .attr("d", `M${arrowStartX},${arrowY} L${arrowEndX},${arrowY} l-6,-6 m6,6 l-6,6`)
-            .attr("stroke", color)
-            .attr("stroke-width", 2.5) 
-            .attr("fill", "none")
-            .attr("stroke-linecap", "round")
-            .attr("stroke-linejoin", "round");
+        g.append("text").attr("x", p.x + dx).attr("y", p.y + dy).text(txt).attr("fill", color).attr("text-anchor", "middle").attr("dominant-baseline", "middle").style("font-weight", "bold").style("font-size", "18px").style("font-family", "Times New Roman, serif").style("font-style", "italic");
+        const arrowY = p.y + dy - 18; const cx = p.x + dx;
+        const arrowStartX = cx - halfLen; const arrowEndX = cx + halfLen;
+        g.append("path").attr("d", `M${arrowStartX},${arrowY} L${arrowEndX},${arrowY} l-6,-6 m6,6 l-6,6`).attr("stroke", color).attr("stroke-width", 2.5).attr("fill", "none").attr("stroke-linecap", "round").attr("stroke-linejoin", "round");
     }
 
     function drawLineSimple(g, p1, p2, color, w, dash) {
-        const l = g.append("line").attr("x1", p1.x).attr("y1", p1.y).attr("x2", p2.x).attr("y2", p2.y)
-            .attr("stroke", color).attr("stroke-width", w);
+        const l = g.append("line").attr("x1", p1.x).attr("y1", p1.y).attr("x2", p2.x).attr("y2", p2.y).attr("stroke", color).attr("stroke-width", w);
         if(dash) l.attr("stroke-dasharray", dash);
     }
 
@@ -372,13 +301,12 @@
         svg.call(d3.drag().on("drag", (e) => callback(e.dx * 0.01, e.dy * 0.01)));
     }
 
+    // --- RENDERERS ---
 
-    // --- SCENE RENDERERS ---
-
-    // 1. QUIZ - SCALED DOWN EXTRA 25% (Total 0.6 factor)
+    // 1. QUIZ - GIỮ TỶ LỆ CỰC NHỎ (0.6) CỦA CODE GỐC
     function renderQuizScene(containerId, highlightLabel) {
         const { svg, width, height } = createSVG(containerId);
-        // *** CHANGED FROM 0.8 TO 0.6 ***
+        // *** TỶ LỆ 0.6 LÀ CHÌA KHÓA ĐỂ HÌNH NHỎ NHƯ CŨ ***
         let scale = (Math.min(width, height) / 5.5) * 0.6; 
         const g = svg.append("g").attr("transform", `translate(${width/2}, ${height/1.6})`);
         let yaw = -0.5, pitch = -0.2;
@@ -389,7 +317,6 @@
             for(let key in vertices) p[key] = project(vertices[key], yaw, pitch, scale);
             const origin = p['O'];
 
-            // 1. Axes
             const ax = project({x:5, y:0, z:0}, yaw, pitch, scale);
             const ay = project({x:0, y:6, z:0}, yaw, pitch, scale);
             const az = project({x:0, y:0, z:5}, yaw, pitch, scale);
@@ -403,7 +330,6 @@
             drawLabel(g, az, "z", "#2563eb", 0, -15);
             drawLabel(g, origin, "O", "black", -15, 10);
 
-            // 2. Unit Vectors (On Top)
             const i = project({x:1, y:0, z:0}, yaw, pitch, scale);
             const j = project({x:0, y:1, z:0}, yaw, pitch, scale);
             const k = project({x:0, y:0, z:1}, yaw, pitch, scale);
@@ -411,12 +337,10 @@
             drawVectorWithArrow(g, origin, i, "#ef4444", 4);
             drawVectorWithArrow(g, origin, j, "#22c55e", 4);
             drawVectorWithArrow(g, origin, k, "#3b82f6", 4);
-
             drawVectorLabel(g, i, "i", "#dc2626", 0, -15);
             drawVectorLabel(g, j, "j", "#16a34a", 0, -15);
             drawVectorLabel(g, k, "k", "#2563eb", 15, 0);
 
-            // 3. Box
             const edges = [
                 ['D', 'C'], ['C', 'B'], 
                 ["A'", "D'"], ["D'", "C'"], ["C'", "B'"], ["B'", "A'"],
@@ -427,7 +351,6 @@
                 .attr("x2", p["C'"].x).attr("y2", p["C'"].y)
                 .attr("stroke", "#06b6d4").attr("stroke-width", 1.5).attr("stroke-dasharray", "4,4");
 
-            // 4. Points
             for (const [label, coord] of Object.entries(vertices)) {
                 if(label === 'O' || label === 'A') continue;
                 const pt = p[label];
@@ -436,8 +359,16 @@
                     .attr("fill", isHighlight ? "#dc2626" : "#f59e0b").attr("stroke", "white");
                 drawLabel(g, pt, label, isHighlight ? "#dc2626" : "#1e293b", 10, -5, isHighlight);
             }
+            
+            // Note: A (trên Ox) chưa được vẽ điểm vàng ở trên, thêm thủ công nếu cần
+            if (highlightLabel === 'A') {
+                 const ptA = p['A'];
+                 g.append("circle").attr("cx", ptA.x).attr("cy", ptA.y).attr("r", 7).attr("fill", "#dc2626").attr("stroke", "white");
+                 drawLabel(g, ptA, 'A', "#dc2626", 10, -5, true);
+            } else {
+                 drawLabel(g, p['A'], 'A', "#1e293b", 10, -5, false);
+            }
 
-            // 5. Dimensions
             drawLabel(g, {x:(origin.x+p['D'].x)/2, y:(origin.y+p['D'].y)/2+15}, "2", "#b45309");
             drawLabel(g, {x:(origin.x+p['B'].x)/2, y:(origin.y+p['B'].y)/2+15}, "4", "#b45309");
             drawLabel(g, {x:(origin.x+p["A'"].x)/2-10, y:(origin.y+p["A'"].y)/2}, "3", "#b45309");
@@ -446,7 +377,7 @@
         setupDrag(svg, (dx, dy) => { yaw += dx; pitch += dy; draw(); });
     }
 
-    // 2. THEORY AXES - Remains at 0.8 scale
+    // 2. THEORY AXES - TỶ LỆ 0.8
     function renderAxesScene(containerId) {
         const { svg, width, height } = createSVG(containerId);
         let scale = (Math.min(width, height) / 5) * 0.8;
@@ -460,11 +391,9 @@
             const py = project({x:0, y:3, z:0}, yaw, pitch, scale);
             const pz = project({x:0, y:0, z:3}, yaw, pitch, scale);
 
-            // Axes with manual arrows
             drawVectorWithArrow(g, origin, px, "#dc2626", 2);
             drawVectorWithArrow(g, origin, py, "#16a34a", 2);
             drawVectorWithArrow(g, origin, pz, "#2563eb", 2);
-
             drawLabel(g, px, "x", "#dc2626", 15, 0);
             drawLabel(g, py, "y", "#16a34a", 0, 15);
             drawLabel(g, pz, "z", "#2563eb", 0, -15);
@@ -474,56 +403,12 @@
             const j = project({x:0, y:1, z:0}, yaw, pitch, scale);
             const k = project({x:0, y:0, z:1}, yaw, pitch, scale);
             
-            // Unit Vectors with manual arrows
             drawVectorWithArrow(g, origin, i, "#ef4444", 4);
             drawVectorWithArrow(g, origin, j, "#22c55e", 4);
             drawVectorWithArrow(g, origin, k, "#3b82f6", 4);
-
             drawVectorLabel(g, i, "i", "#dc2626", 0, -15);
             drawVectorLabel(g, j, "j", "#16a34a", 0, -15);
             drawVectorLabel(g, k, "k", "#2563eb", 15, 0);
-        }
-        draw();
-        setupDrag(svg, (dx, dy) => { yaw += dx; pitch += dy; draw(); });
-    }
-
-    // 3. THEORY POINT - Remains at 0.8 scale
-    function renderPointScene(containerId) {
-        const { svg, width, height } = createSVG(containerId);
-        let scale = (Math.min(width, height) / 5.5) * 0.8;
-        const g = svg.append("g").attr("transform", `translate(${width/2}, ${height/1.6})`);
-        let yaw = -0.5, pitch = -0.2;
-
-        function draw() {
-            g.selectAll("*").remove();
-            const origin = project({x:0,y:0,z:0}, yaw, pitch, scale);
-            
-            drawVectorWithArrow(g, origin, project({x:4.5,y:0,z:0}, yaw, pitch, scale), "#cbd5e1", 1.5);
-            drawVectorWithArrow(g, origin, project({x:0,y:5,z:0}, yaw, pitch, scale), "#cbd5e1", 1.5);
-            drawVectorWithArrow(g, origin, project({x:0,y:0,z:4.5}, yaw, pitch, scale), "#cbd5e1", 1.5);
-
-            const M_data = {x:3, y:3, z:3};
-            const M = project(M_data, yaw, pitch, scale);
-            const Mx = project({x:3,y:0,z:0}, yaw, pitch, scale);
-            const My = project({x:0,y:3,z:0}, yaw, pitch, scale);
-            const Mz = project({x:0,y:0,z:3}, yaw, pitch, scale);
-            const Mxy = project({x:3,y:3,z:0}, yaw, pitch, scale);
-
-            // Vector OM with Red Arrow
-            drawVectorWithArrow(g, origin, M, "#ef4444", 3);
-
-            drawLineSimple(g, Mx, Mxy, "#94a3b8", 1, "3,3");
-            drawLineSimple(g, My, Mxy, "#94a3b8", 1, "3,3");
-            drawLineSimple(g, Mxy, M, "#94a3b8", 1, "3,3");
-            drawLineSimple(g, Mz, M, "#94a3b8", 1, "3,3");
-            
-            g.append("circle").attr("cx", M.x).attr("cy", M.y).attr("r", 6).attr("fill", "red");
-            
-            const midOM = {x: (origin.x + M.x)/2, y: (origin.y + M.y)/2};
-            drawVectorLabel(g, midOM, "OM", "red", -10, -10);
-
-            drawLabel(g, M, "M(x;y;z)", "black", 15, -10);
-            drawLabel(g, origin, "O", "black", -15, 10);
         }
         draw();
         setupDrag(svg, (dx, dy) => { yaw += dx; pitch += dy; draw(); });
