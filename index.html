@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final - Small Visuals)</title>
+    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final Fix A=O)</title>
     
     <script>
     window.MathJax = {
@@ -93,7 +93,7 @@
                 <div class="highlight-box"><p>Tọa độ điểm $A$ là: </p></div>
                 <div class="options">
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(1; 1; 1)$</button>
-                    <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(2; 0; 0)$</button>
+                    <button class="quiz-btn" onclick="checkAnswer(this, true)">B. $(0; 0; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">C. $(0; 2; 0)$</button>
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">D. $(0; 0; 2)$</button>
                 </div>
@@ -199,7 +199,7 @@
     const slideConfig = [
         { type: 'html' },
         { type: 'theory-axes', targetId: 'viz-theory-1' },
-        { type: 'quiz', targetId: 'viz-q1', highlight: 'A' },
+        { type: 'quiz', targetId: 'viz-q1', highlight: 'A' }, // A trùng O
         { type: 'quiz', targetId: 'viz-q2', highlight: 'B' },
         { type: 'quiz', targetId: 'viz-q3', highlight: "A'" },
         { type: 'quiz', targetId: 'viz-q4', highlight: 'C' },
@@ -246,11 +246,17 @@
         resizeTimer = setTimeout(() => showSlide(currentSlide), 100);
     });
 
-    // --- D3 LOGIC (GIỮ NGUYÊN CODE GỐC ĐỂ HÌNH NHỎ) ---
+    // --- D3 LOGIC ---
+    // SỬA LẠI TỌA ĐỘ: D là điểm trên Ox, A trùng O (xử lý ở hiển thị)
     const vertices = {
-        'O': {x:0, y:0, z:0}, 'A': {x:2, y:0, z:0},
-        'D': {x:2, y:0, z:0}, 'B': {x:0, y:4, z:0}, 'C': {x:2, y:4, z:0},
-        "A'": {x:0, y:0, z:3}, "D'": {x:2, y:0, z:3}, "B'": {x:0, y:4, z:3}, "C'": {x:2, y:4, z:3}
+        'O': {x:0, y:0, z:0}, 
+        'D': {x:2, y:0, z:0}, // Điểm trên Ox (trước đây trùng A)
+        'B': {x:0, y:4, z:0}, 
+        'C': {x:2, y:4, z:0},
+        "A'": {x:0, y:0, z:3}, 
+        "D'": {x:2, y:0, z:3}, 
+        "B'": {x:0, y:4, z:3}, 
+        "C'": {x:2, y:4, z:3}
     };
 
     function createSVG(containerId) {
@@ -303,10 +309,9 @@
 
     // --- RENDERERS ---
 
-    // 1. QUIZ - GIỮ TỶ LỆ CỰC NHỎ (0.6) CỦA CODE GỐC
+    // 1. QUIZ - CODE GỐC (0.6 SCALE)
     function renderQuizScene(containerId, highlightLabel) {
         const { svg, width, height } = createSVG(containerId);
-        // *** TỶ LỆ 0.6 LÀ CHÌA KHÓA ĐỂ HÌNH NHỎ NHƯ CŨ ***
         let scale = (Math.min(width, height) / 5.5) * 0.6; 
         const g = svg.append("g").attr("transform", `translate(${width/2}, ${height/1.6})`);
         let yaw = -0.5, pitch = -0.2;
@@ -328,7 +333,14 @@
             drawLabel(g, ax, "x", "#dc2626", 15, 0);
             drawLabel(g, ay, "y", "#16a34a", 0, 15);
             drawLabel(g, az, "z", "#2563eb", 0, -15);
-            drawLabel(g, origin, "O", "black", -15, 10);
+            
+            // XỬ LÝ NHÃN O(A)
+            if (highlightLabel === 'A') {
+                // Nếu đang hỏi điểm A, đổi màu và nhãn
+                drawLabel(g, origin, "O (A)", "#dc2626", -25, 10, true);
+            } else {
+                drawLabel(g, origin, "O", "black", -15, 10);
+            }
 
             const i = project({x:1, y:0, z:0}, yaw, pitch, scale);
             const j = project({x:0, y:1, z:0}, yaw, pitch, scale);
@@ -347,26 +359,25 @@
                 ['D', "D'"], ['C', "C'"], ['B', "B'"]
             ];
             edges.forEach(e => drawLineSimple(g, p[e[0]], p[e[1]], "#64748b", 1.5));
-            g.append("line").attr("x1", p['A'].x).attr("y1", p['A'].y)
+            g.append("line").attr("x1", p['D'].x).attr("y1", p['D'].y)
                 .attr("x2", p["C'"].x).attr("y2", p["C'"].y)
                 .attr("stroke", "#06b6d4").attr("stroke-width", 1.5).attr("stroke-dasharray", "4,4");
 
+            // Vẽ các điểm
             for (const [label, coord] of Object.entries(vertices)) {
-                if(label === 'O' || label === 'A') continue;
+                if(label === 'O') continue;
                 const pt = p[label];
                 const isHighlight = (label === highlightLabel);
+                
                 g.append("circle").attr("cx", pt.x).attr("cy", pt.y).attr("r", isHighlight ? 7 : 4)
                     .attr("fill", isHighlight ? "#dc2626" : "#f59e0b").attr("stroke", "white");
                 drawLabel(g, pt, label, isHighlight ? "#dc2626" : "#1e293b", 10, -5, isHighlight);
             }
             
-            // Note: A (trên Ox) chưa được vẽ điểm vàng ở trên, thêm thủ công nếu cần
+            // Xử lý highlight điểm A (tức là highlight O)
             if (highlightLabel === 'A') {
-                 const ptA = p['A'];
-                 g.append("circle").attr("cx", ptA.x).attr("cy", ptA.y).attr("r", 7).attr("fill", "#dc2626").attr("stroke", "white");
-                 drawLabel(g, ptA, 'A', "#dc2626", 10, -5, true);
-            } else {
-                 drawLabel(g, p['A'], 'A', "#1e293b", 10, -5, false);
+                g.append("circle").attr("cx", origin.x).attr("cy", origin.y).attr("r", 7)
+                    .attr("fill", "#dc2626").attr("stroke", "white");
             }
 
             drawLabel(g, {x:(origin.x+p['D'].x)/2, y:(origin.y+p['D'].y)/2+15}, "2", "#b45309");
@@ -377,7 +388,7 @@
         setupDrag(svg, (dx, dy) => { yaw += dx; pitch += dy; draw(); });
     }
 
-    // 2. THEORY AXES - TỶ LỆ 0.8
+    // 2. THEORY AXES - 0.8 SCALE
     function renderAxesScene(containerId) {
         const { svg, width, height } = createSVG(containerId);
         let scale = (Math.min(width, height) / 5) * 0.8;
