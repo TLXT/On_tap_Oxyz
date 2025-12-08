@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final Fix A=O)</title>
+    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final Fix + Audio)</title>
     
     <script>
     window.MathJax = {
@@ -189,6 +189,47 @@
 </div>
 
 <script>
+    // --- AUDIO SYSTEM (Thêm mới) ---
+    // Sử dụng Web Audio API để tạo âm thanh trực tiếp mà không cần file ngoài
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playFeedbackSound(isCorrect) {
+        // Resume context nếu bị trình duyệt chặn (autoplay policy)
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        if (isCorrect) {
+            // Âm thanh ĐÚNG: Sine wave, tần số cao, biến thiên (hiệu ứng "Ting")
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1);
+            
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime); // Volume vừa phải
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5); // Fade out nhanh
+
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.5);
+        } else {
+            // Âm thanh SAI: Sawtooth wave, tần số thấp (hiệu ứng "Buzz")
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+            oscillator.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+
+            gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.3);
+        }
+    }
+
     // --- SETUP ---
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide-content');
@@ -236,8 +277,13 @@
         const parent = btn.parentElement;
         const siblings = parent.querySelectorAll('.quiz-btn');
         siblings.forEach(b => b.classList.remove('correct', 'wrong'));
+        
+        // Visual Feedback
         if(isCorrect) btn.classList.add('correct');
         else btn.classList.add('wrong');
+
+        // Audio Feedback (Đã thêm mới)
+        playFeedbackSound(isCorrect);
     }
 
     let resizeTimer;
@@ -247,10 +293,10 @@
     });
 
     // --- D3 LOGIC ---
-    // SỬA LẠI TỌA ĐỘ: D là điểm trên Ox, A trùng O (xử lý ở hiển thị)
+    // SỬA LẠI TỌA ĐỘ: D là điểm trên Ox, A trùng O
     const vertices = {
         'O': {x:0, y:0, z:0}, 
-        'D': {x:2, y:0, z:0}, // Điểm trên Ox (trước đây trùng A)
+        'D': {x:2, y:0, z:0}, // Điểm trên Ox
         'B': {x:0, y:4, z:0}, 
         'C': {x:2, y:4, z:0},
         "A'": {x:0, y:0, z:3}, 
