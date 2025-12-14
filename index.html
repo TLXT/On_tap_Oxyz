@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Final Fix + Audio)</title>
+    <title>Bài 7: Hệ Trục Tọa Độ Oxyz (Đã lược bỏ intro)</title>
     
     <script>
     window.MathJax = {
@@ -62,34 +62,13 @@
     <div id="slide-deck">
         <div class="slide-header">
             <span>HỆ TRỤC TỌA ĐỘ OXYZ</span>
-            <span id="slide-indicator" class="text-xs font-normal text-gray-300 ml-2">Slide 1/9</span>
+            <span id="slide-indicator" class="text-xs font-normal text-gray-300 ml-2">Slide 1/7</span>
         </div>
 
-        <div class="slide-content active" id="slide-0">
-            <div class="slide-full flex flex-col items-center justify-center text-center bg-slate-900 text-white">
-                <h1 class="text-4xl font-bold mb-4 text-blue-400">HỆ TRỤC TOẠ ĐỘ<br>TRONG KHÔNG GIAN</h1>
-                <p class="text-lg text-slate-400">Bài tập trắc nghiệm (6 câu)</p>
-            </div>
-        </div>
-
-        <div class="slide-content slide-split" id="slide-1">
-            <div class="left">
-                <h2 class="text-xl font-bold text-blue-700 mb-2">1. Hệ trục Oxyz</h2>
-                <div class="highlight-box">
-                    <p>Ba trục $Ox, Oy, Oz$ vuông góc nhau tại $O$.</p>
-                    <ul class="mt-1 list-disc pl-4 text-sm">
-                        <li>$O(0;0;0)$.</li>
-                        <li>$\vec{i}, \vec{j}, \vec{k}$: Vectơ đơn vị.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="right" id="viz-theory-1"></div>
-        </div>
-
-        <div class="slide-content slide-split" id="slide-2">
+        <div class="slide-content slide-split active" id="slide-2">
             <div class="left">
                 <h2 class="text-lg font-bold text-slate-800">Câu 1</h2>
-                <p class="text-sm mb-2">Cho hình hộp có $Ox=2, Oy=4, Oz=3$.</p>
+                
                 <div class="highlight-box"><p>Tọa độ điểm $A$ là: </p></div>
                 <div class="options">
                     <button class="quiz-btn" onclick="checkAnswer(this, false)">A. $(1; 1; 1)$</button>
@@ -189,12 +168,10 @@
 </div>
 
 <script>
-    // --- AUDIO SYSTEM (Thêm mới) ---
-    // Sử dụng Web Audio API để tạo âm thanh trực tiếp mà không cần file ngoài
+    // --- AUDIO SYSTEM ---
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playFeedbackSound(isCorrect) {
-        // Resume context nếu bị trình duyệt chặn (autoplay policy)
         if (audioCtx.state === 'suspended') {
             audioCtx.resume();
         }
@@ -206,18 +183,16 @@
         gainNode.connect(audioCtx.destination);
 
         if (isCorrect) {
-            // Âm thanh ĐÚNG: Sine wave, tần số cao, biến thiên (hiệu ứng "Ting")
             oscillator.type = 'sine';
             oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
             oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.1);
             
-            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime); // Volume vừa phải
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5); // Fade out nhanh
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime); 
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5); 
 
             oscillator.start();
             oscillator.stop(audioCtx.currentTime + 0.5);
         } else {
-            // Âm thanh SAI: Sawtooth wave, tần số thấp (hiệu ứng "Buzz")
             oscillator.type = 'sawtooth';
             oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
             oscillator.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.3);
@@ -236,17 +211,15 @@
     const totalSlides = slides.length;
     const indicator = document.getElementById('slide-indicator');
 
-    // Cấu hình Slide
+    // Cấu hình Slide (Đã xóa 2 slide đầu)
     const slideConfig = [
-        { type: 'html' },
-        { type: 'theory-axes', targetId: 'viz-theory-1' },
-        { type: 'quiz', targetId: 'viz-q1', highlight: 'A' }, // A trùng O
+        { type: 'quiz', targetId: 'viz-q1', highlight: 'A' }, // Bây giờ là Slide 1
         { type: 'quiz', targetId: 'viz-q2', highlight: 'B' },
         { type: 'quiz', targetId: 'viz-q3', highlight: "A'" },
         { type: 'quiz', targetId: 'viz-q4', highlight: 'C' },
         { type: 'quiz', targetId: 'viz-q5', highlight: "B'" },
         { type: 'quiz', targetId: 'viz-q6', highlight: "C'" },
-        { type: 'html' }
+        { type: 'html' } // Slide hoàn thành
     ];
 
     function showSlide(index) {
@@ -282,7 +255,7 @@
         if(isCorrect) btn.classList.add('correct');
         else btn.classList.add('wrong');
 
-        // Audio Feedback (Đã thêm mới)
+        // Audio Feedback
         playFeedbackSound(isCorrect);
     }
 
@@ -293,7 +266,6 @@
     });
 
     // --- D3 LOGIC ---
-    // SỬA LẠI TỌA ĐỘ: D là điểm trên Ox, A trùng O
     const vertices = {
         'O': {x:0, y:0, z:0}, 
         'D': {x:2, y:0, z:0}, // Điểm trên Ox
@@ -434,7 +406,7 @@
         setupDrag(svg, (dx, dy) => { yaw += dx; pitch += dy; draw(); });
     }
 
-    // 2. THEORY AXES - 0.8 SCALE
+    // 2. THEORY AXES - 0.8 SCALE (Giữ lại hàm nhưng không gọi trong config)
     function renderAxesScene(containerId) {
         const { svg, width, height } = createSVG(containerId);
         let scale = (Math.min(width, height) / 5) * 0.8;
